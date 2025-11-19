@@ -1,62 +1,101 @@
 import React from "react";
-import orthos from './img/ortho_hero.png';
-import heroBack from './img/hero_back.jpg';
+import orthos from "./img/ortho_hero.png";
+import heroBack from "./img/hero_back.jpg";
 
-export const Hero = () => {
+export const Hero = ({ onBuyTicket }) => {
   return (
     <div
-      className="w-full min-h-screen bg-[#0a2a57] text-white font-sans relative overflow-hidden bg-cover bg-center bg-no-repeat"
+      id="hero"
+      className="relative min-h-screen w-full bg-cover bg-center bg-no-repeat font-sans text-white"
       style={{ backgroundImage: `url(${heroBack})` }}
     >
-      {/* Navigation */}
-      <header className="flex justify-center items-center px-8 py-6 relative z-10 gap-12">
-        <a href="#" className="hover:opacity-100">О форуме</a>
-        <a href="#" className="hover:opacity-100">Спикеры форума</a>
-        <a href="#" className="hover:opacity-100">Контакты</a>
+      {/* затемнение поверх фона */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030a1c]/80 via-[#041b39]/85 to-[#041b39]" />
+
+      {/* Навигация */}
+      <header className="relative z-10 flex justify-center gap-12 py-6 text-xs uppercase tracking-wide text-blue-100">
+        <a href="#who" className="transition hover:text-white">
+          О форуме
+        </a>
+        <a href="#speakers" className="transition hover:text-white">
+          Спикеры форума
+        </a>
+        <a href="#contacts" className="transition hover:text-white">
+          Контакты
+        </a>
       </header>
 
-      {/* Title */}
-      <div className="px-8 pt-12 max-w-4xl relative z-10">
-        <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
-          ВВЕДЕНИЕ В ОРТОПЕДИЮ
-        </h1>
-        <p className="mt-6 text-lg text-left text-blue-200 max-w-2xl">
-          Форум, где создается будущее современной медицины. Ортопедия: от диагностики до коррекции
-        </p>
-      </div>
+      {/* Контент */}
+      <div className="relative z-10 w-full pt-4">
 
-      {/* Speakers Section */}
-      <div className="mt-16 px-8 flex flex-col lg:flex-row justify-between gap-12 relative z-10">
-        {/* Speaker 1 */}
-        <div className="flex-1 text-center lg:text-left">
-          <h3 className="text-2xl font-bold">Иванов Аркадий Николаевич</h3>
-          <p className="mt-1 text-blue-200">спикер</p>
-        </div>
+        {/* Текст слева */}
+        <div className="w-full text-left pl-4 md:pl-10 xl:pl-16">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-blue-200">
+            Интенсив
+          </p>
 
-        {/* Photo */}
-        <div className="flex-1 flex justify-center">
-          <img
-            src={orthos}
-            alt="speaker 1"
-            className="rounded-2xl shadow-lg object-cover"
-          />
-        </div>
+          <h1 className="mt-4 text-4xl font-extrabold leading-tight md:text-6xl">
+            ВВЕДЕНИЕ В ОРТОПЕДИЮ
+          </h1>
 
-        {/* Speaker 2 + Buttons */}
-        <div className="flex-1 text-center lg:text-left">
-          <h3 className="text-2xl font-bold">Петров Дмитрий Олегович</h3>
-          <p className="mt-1 text-blue-200">спикер</p>
+          <p className="mt-6 max-w-lg text-lg text-blue-100">
+            Форум, где создается будущее современной медицины. Ортопедия: от
+            диагностики до коррекции
+          </p>
 
-          {/* Buttons под вторым спикером */}
-          <div className="mt-4 flex flex-col gap-4">
-            <button className="px-10 py-4 border border-blue-300 rounded-xl hover:bg-blue-600 transition">
-              КУПИТЬ БИЛЕТ
-            </button>
-            <button className="px-10 py-4 border border-blue-300 rounded-xl hover:bg-blue-600 transition">
-              ПРОГРАММА ФОРУМА
-            </button>
+          <div className="mt-6 flex flex-wrap gap-6 text-sm text-blue-100">
+            <span>29–30 января 2026</span>
+            <span>Санкт-Петербург • МФК «Бугры»</span>
           </div>
         </div>
+
+        {/* Спикеры: имена по бокам, фото по центру */}
+        <div
+          id="speakers"
+          className="mt-16 flex flex-col items-center justify-center gap-10 lg:flex-row lg:gap-20"
+        >
+          {/* Левый спикер */}
+          <div className="max-w-xs text-center lg:text-right">
+            <h3 className="text-2xl font-semibold">
+              Иванов Аркадий Николаевич
+            </h3>
+            <p className="mt-3 text-blue-200">спикер</p>
+          </div>
+
+          {/* Фото — без рамки и без тени */}
+          <div className="flex justify-center">
+            <img
+              src={orthos}
+              alt="Спикеры"
+              className="block max-w-md lg:max-w-lg"
+            />
+          </div>
+
+          {/* Правый спикер + кнопки */}
+          <div className="max-w-xs text-center lg:text-left">
+            <h3 className="text-2xl font-semibold">
+              Петров Дмитрий Олегович
+            </h3>
+            <p className="mt-3 text-blue-200">спикер</p>
+
+            <div className="mt-8 flex flex-col gap-4">
+              <button
+                onClick={onBuyTicket}
+                className="rounded-2xl border border-blue-200/60 px-8 py-4 font-semibold uppercase tracking-wide transition hover:border-white hover:bg-white/10"
+              >
+                Купить билет
+              </button>
+
+              <a
+                href="#program"
+                className="rounded-2xl border border-blue-200/60 px-8 py-4 text-center font-semibold uppercase tracking-wide transition hover:border-white hover:bg-white/10"
+              >
+                Программа форума
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );
